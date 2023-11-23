@@ -34,8 +34,8 @@ body {
 
 .seat {
   background-color: #444451;
-  height: 12px;
-  width: 15px;
+  height: 24px;
+  width: 30px;
   margin: 3px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -94,7 +94,7 @@ body {
 
 .screen {
   background-color: #fff;
-  height: 70px;
+  height: 110px;
   width: 100%;
   margin: 15px 0px;
   transform: rotateX(-45deg);
