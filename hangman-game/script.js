@@ -110,7 +110,7 @@ const correctletters = [];
 const wrongLetters = [];
 
 // Show hidden word
-const displayWord = (() => {
+const displayWord = () => {
   wordEl.innerHTML = `
         ${selectedWord
           .split("")
@@ -131,4 +131,45 @@ const displayWord = (() => {
     finalMessage.innerText = "Congratulations! You won! 🥳";
     popup.style.display = "flex";
   }
-})();
+};
+
+displayWord();
+
+// Update Wrong Letters
+const updateWrongLettersEl = () => {
+  console.log("Update Wrong");
+};
+
+// Show notification
+const showNotification = () => {
+  notification.classList.add("show");
+
+  setTimeout(() => {
+    notification.classList.remove("show");
+  }, 2000);
+};
+
+// Keydown letter press
+window.addEventListener("keydown", (e) => {
+  const letter = e.key;
+
+  if (letter >= "a" && letter <= "z") {
+    if (selectedWord.includes(letter)) {
+      if (!correctletters.includes(letter)) {
+        correctletters.push(letter);
+
+        displayWord();
+      } else {
+        showNotification();
+      }
+    } else {
+      if (!wrongLetters.includes(letter)) {
+        wrongLetters.push(letter);
+
+        updateWrongLettersEl();
+      } else {
+        showNotification();
+      }
+    }
+  }
+});
