@@ -104,10 +104,17 @@ const words = [
   "zenith",
 ];
 
-let selectedWord = words[Math.floor(Math.random() * words.length)];
 
 const correctletters = [];
 const wrongLetters = [];
+
+const getNewWord = () => words[Math.floor(Math.random() * words.length)];
+let selectedWord = getNewWord();
+
+const showPopup = (message) => {
+  finalMessage.innerText = message;
+  popup.style.display = "flex";
+};
 
 // Show hidden word
 const displayWord = () => {
@@ -128,8 +135,7 @@ const displayWord = () => {
 
   // Checking if won
   if (innerWord === selectedWord) {
-    finalMessage.innerText = "Congratulations! You won! 🥳";
-    popup.style.display = "flex";
+    showPopup("Congratulations! You won! 🥳");
   }
 };
 
@@ -137,7 +143,28 @@ displayWord();
 
 // Update Wrong Letters
 const updateWrongLettersEl = () => {
-  console.log("Update Wrong");
+  // Display wrong letters
+  wrongLettersEl.innerHTML = `
+    ${wrongLetters.length > 0 ? "<p>Wrong</p>" : ""}
+    ${wrongLetters.map((letter) => `<span>${letter}</span>`)}
+  `;
+
+  // Display Parts
+  figureParts.forEach((part, index) => {
+    const noOfErrors = wrongLetters.length;
+
+    // Show number of parts based on number of errors
+    if (index < noOfErrors) {
+      part.style.display = "block";
+    } else {
+      part.style.display = "none";
+    }
+  });
+
+  // Check if lost
+  if (wrongLetters.length === figureParts.length) {
+    showPopup("Unfortunately you lost. 😔");
+  }
 };
 
 // Show notification
@@ -172,4 +199,20 @@ window.addEventListener("keydown", (e) => {
       }
     }
   }
+});
+
+// Restart game and play again
+playAgainBtn.addEventListener("click", () => {
+  // Empty arrays
+  correctletters.splice(0);
+  wrongLetters.splice(0);
+
+  selectedWord = getNewWord();
+
+  displayWord();
+  console.log({ wrongLetters });
+
+  updateWrongLettersEl();
+
+  popup.style.display = "none";
 });
