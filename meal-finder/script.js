@@ -60,8 +60,6 @@ const addMealToDOM = (meal) => {
     }
   }
 
-  console.log(meal);
-
   single_mealEl.innerHTML = `
     <div class="single-meal">
       <h1>${meal.strMeal}</h1>
@@ -91,8 +89,26 @@ const getMealById = (mealId) => {
     });
 };
 
+// Fetch random meal from API
+const getRandomMeal = () => {
+  // Clear meals and heading
+  mealsEl.innerHTML = "";
+  resultHeading.innerHTML = "";
+
+  fetch("https://www.themealdb.com/api/json/v1/1/random.php")
+    .then((res) => res.json())
+    .then((data) => {
+      const meal = data.meals[0];
+
+      addMealToDOM(meal);
+    });
+};
+
 // Event listeners
 submit.addEventListener("submit", searchMeal);
+random.addEventListener("click", getRandomMeal);
+
+
 
 mealsEl.addEventListener("click", (e) => {
   const mealInfo = e.composedPath().find((item) => {
