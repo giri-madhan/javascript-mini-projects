@@ -31,7 +31,12 @@
     <div class="container">
         <h2>⌨ Speed Typer ⌨</h2>
         <small>Type the following:</small>
-        <h4 id="word"></h4>
+        <div class="word-container">
+            <h4 id="word">test</h4>
+            <div class="loader loading">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
 
         <input type="text" id="text" autocomplete="off" placeholder="Type the word here...">
         <p class="time-container">
@@ -39,7 +44,7 @@
         </p>
 
         <p class="score-container">
-            Score: <span id="core">0</span>
+            Score: <span id="score">0</span>
         </p>
 
         <div id="end-game-container" class="end-game-container"></div>
