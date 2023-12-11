@@ -45,7 +45,7 @@ select {
     align-items: center;
     justify-content: center;
     transform: translateY(0);
-    transition: transform 0,3s ease-in;
+    transition: transform 0.3s ease-in;
 }
 
 .settings.hide {
