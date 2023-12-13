@@ -53,6 +53,10 @@ h1 {
   transform: translate(-50%, -800px);
 }
 
+.text-box.show {
+  transform: translate(-50%, 0);
+}
+
 .text-box select {
   background-color: darksalmon;
   color: #fff;

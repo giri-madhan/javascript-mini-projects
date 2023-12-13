@@ -3,7 +3,8 @@ const voicesSelect = document.getElementById("voices");
 const textArea = document.getElementById("text");
 const readBtn = document.getElementById("read");
 const toggleBtn = document.getElementById("toggle");
-const closeBtn = document.getElementById("close");
+const closeTextBoxBtn = document.getElementById("close");
+const textBox = document.getElementById("text-box");
 
 const data = [
   {
@@ -67,9 +68,75 @@ const createBox = (item) => {
     <p class="info">${text}</p>
   `;
 
-  // @todo - speak event
+  box.addEventListener("click", () => {
+    setTextMessage(text);
+    speakText();
+
+    // Active effect on UI
+    box.classList.add("active");
+    // Removing effect after few seconds
+    setTimeout(() => box.classList.remove("active"), 800);
+  });
 
   main.appendChild(box);
 };
 
+// Init speech synth
+const message = new SpeechSynthesisUtterance();
+
+// Set text on box
+function setTextMessage(text) {
+  message.text = text;
+}
+
+// Speak text
+function speakText() {
+  speechSynthesis.speak(message);
+}
+
 data.forEach(createBox);
+
+// Voices
+let voices = [];
+
+const getVoices = () => {
+  voices = speechSynthesis.getVoices();
+
+  voices.forEach((voice) => {
+    const option = document.createElement("option");
+
+    option.value = voice.name;
+    option.innerText = `${voice.name} ${voice.lang}`;
+
+    voicesSelect.appendChild(option);
+  });
+};
+
+const setVoice = (e) => {
+  message.voice = voices.find((voice) => voice.name === e.target.value);
+};
+
+const readCustomText = () => {
+  setTextMessage(textArea.value);
+  speakText();
+};
+
+// Event listeners
+// Toggle text box
+toggleBtn.addEventListener("click", () => textBox.classList.toggle("show"));
+closeTextBoxBtn.addEventListener("click", () =>
+  textBox.classList.remove("show")
+);
+
+// Change voice
+voicesSelect.addEventListener("change", setVoice);
+
+// Voices changed
+speechSynthesis.addEventListener("voiceschanged", getVoices);
+
+// Read text button
+readBtn.addEventListener("click", readCustomText);
+
+// init
+getVoices();
+
