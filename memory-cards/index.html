@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meory Cards</title>
+    <title>Memory Cards</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"
         integrity="sha512-u7ppO4TLg4v6EY8yQ6T6d66inT0daGyTodAi6ycbw9+/AU8KMLAF7Z7YGKPMRA96v7t+c7O1s6YCTGkok6p9ZA=="
@@ -14,15 +14,16 @@
 
 <body>
     <button id="clear" class="clear btn">
-        <i class="fas fas-trash">Clear Cards</i>
+        <i class="fas fa-trash">Clear Cards</i>
     </button>
-    <h1>Memory Cards</h1>
-    <button id="show" class="btn btn-small">
-        <i class="fas fa-plus"></i> Add New Card
-    </button>
+    <h1>Memory Cards
+        <button id="show" class="btn btn-small">
+            <i class="fas fa-plus"></i> Add New Card
+        </button>
+    </h1>
 
     <div id="cards-container" class="cards">
-        <div class="card active">
+        <!-- <div class="card active show-answer">
             <div class="inner-card">
                 <div class="inner-card-front">
                     <p>What is PHP?</p>
@@ -51,7 +52,7 @@
                     <p>A LLM AI Assistant</p>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <div class="navigation">
