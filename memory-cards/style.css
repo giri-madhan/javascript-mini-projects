@@ -84,6 +84,10 @@ h1 button {
     transform: translateX(-50%) rotateY(10deg);
 }
 
+.card.right {
+    transform: translateX(50%) rotateY(-10deg);
+}
+
 .inner-card {
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
     border-radius: 4px;
@@ -91,7 +95,7 @@ h1 button {
     width: 100%;
     position: relative;
     transform-style: preserve-3d;
-    transition: transform o.4s ease;
+    transition: transform 0.4s ease;
 }
 
 .card.show-answer .inner-card {
