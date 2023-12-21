@@ -105,6 +105,18 @@ const movePaddle = () => {
   }
 };
 
+const showAllBricks = () => {
+  bricks.forEach((column) => column.forEach((brick) => (brick.visible = true)));
+};
+
+const increaseScore = () => {
+  score++;
+
+  if (score % (brickRowCount * brickColumnCount) === 0) {
+    showAllBricks();
+  }
+};
+
 const moveBall = () => {
   ball.x += ball.dx;
   ball.y += ball.dy;
@@ -139,10 +151,18 @@ const moveBall = () => {
         ) {
           ball.dy *= -1;
           brick.visible = false;
+
+          increaseScore();
         }
       }
     })
   );
+
+  // Hit bottom - Lose
+  if (ball.y + ball.size > canvas.height) {
+    showAllBricks();
+    score = 0;
+  }
 };
 
 // Draw everythnig
